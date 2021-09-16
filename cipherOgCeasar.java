@@ -3,7 +3,6 @@ package company;
 import java.util.Arrays;
 import java.util.Scanner;
 
-
 public class cipherOgCeasar {
 
     public static void main(String[] args) {
@@ -23,24 +22,26 @@ public class cipherOgCeasar {
                     Ønsker du at enkode eller dekode?
                     Skriv e for at enkode
                     Skriv d for at dekode""");
-            String nextAnswer = scanner.nextLine();
-            if (nextAnswer.equals("e")) {
+            String answerEOrD = scanner.nextLine();
+            String lowerCaseAnswer=answerEOrD.toLowerCase();
+            if (lowerCaseAnswer.equals("e")){
                 System.out.println("""
-                        Du har valgt at en kode en tekst.
+                        Du har valgt at enkode en tekst.
                         Skriv den tekst her:""");
-                String plaintext = scanner.nextLine();
-                int[] planTextAsArray = textToListOfNumbers(plaintext);
-                String encryptetText = Arrays.toString(planTextAsArray);
-                System.out.println("Din talrække er: " + encryptetText);
+                String plainText = scanner.nextLine();
+                String upperCasePlainText = plainText.toUpperCase();
+                int[] planTextAsArray = textToListOfNumbers(upperCasePlainText);
+                String encryptedText = Arrays.toString(planTextAsArray);
+                System.out.println("Din krypterede tekst er: " + encryptedText);
             }
-            if (nextAnswer.equals("d")) {
+            if (lowerCaseAnswer.equals("d")) {
                 System.out.println("""
                         Du har valgt at en dekode en tekst.
-                        Skriv din tal række her:""");
-                String ciphertext = scanner.nextLine();
-                int[] ciphertextAsArray = splitNumbersIntoArray(ciphertext);
-                String decryptetText = listOfNumbersToText(ciphertextAsArray);
-                System.out.println("Din tekst er: " + decryptetText);
+                        Skriv din talrække her:""");
+                String cipherText = scanner.nextLine();
+                int[] cipherTextAsArray = splitNumbersIntoArray(cipherText);
+                String decryptedText = listOfNumbersToText(cipherTextAsArray);
+                System.out.println("Din tekst er: " + decryptedText);
             }
         }
         if (answer.equals("2")) {
@@ -49,33 +50,35 @@ public class cipherOgCeasar {
                     Ønsker du at enkode eller dekode?
                     Skriv e for at enkode
                     Skriv d for at dekode""");
-            String nextAnswer = scanner.nextLine();
-            if (nextAnswer.equals("e")) {
+            String answerEOrD = scanner.nextLine();
+            String lowerCaseAnswer=answerEOrD.toLowerCase();
+            if (lowerCaseAnswer.equals("e")) {
                 System.out.println("""
                         Du har valgt at enkode en tekst.
                         Skriv din tekst her:""");
-                String plaintext = scanner.nextLine();
+                String plainText = scanner.nextLine();
+                String upperCasePlainText = plainText.toUpperCase();
                 System.out.println("Hvilket tal skal koden forskydes med? (vælg tal mellem 1-29)");
                 int shift = scanner.nextInt();
-                String encryptettext = caesarEncrypt(plaintext, shift);
-                System.out.println("Din krypterede tekst er " + encryptettext);
+                String encryptedText = caesarEncrypt(upperCasePlainText, shift);
+                System.out.println("Din krypterede tekst er " + encryptedText);
 
             }
-            if (nextAnswer.equals("d")) {
+            if (lowerCaseAnswer.equals("d")) {
                 System.out.println("""
                         Du har valgt at en dekode en tekst.
                         Skriv din krypterede tekst her:""");
-                String ciphertext = scanner.nextLine();
+                String cipherText = scanner.nextLine();
+                String upperCaseCipherText=cipherText.toUpperCase();
                 System.out.println("Hvilket tal er koden forskudt med? (vælg tal mellem 1-29)");
                 int shift = scanner.nextInt();
                 shift = 29 - shift;
-                String decryptetText = caesarDecrypt(ciphertext, shift);
-                System.out.println("Din dekrypterede tekst er " + decryptetText);
+                String decryptedText = caesarDecrypt(upperCaseCipherText, shift);
+                System.out.println("Din dekrypterede tekst er " + decryptedText);
             }
         }
         if (answer.equals("0")) {
             System.out.println("Tak for denne gang!");
-
         }
     }
 
@@ -112,31 +115,29 @@ public class cipherOgCeasar {
     }
 
     public static char numberToLetter(int number) {
-        String alfabetet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
-        char letter = alfabetet.charAt(number);
+        String alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
+        char letter = alphabet.charAt(number);
         return letter;
     }
 
     public static int letterToNumber(char letter) {
-        String alfabetet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
-        int number = alfabetet.indexOf(letter);
+        String alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
+        int number = alphabet.indexOf(letter);
         return number;
-
     }
 
-    public static String caesarEncrypt(String plaintext, int shift) {
-        int[] numbers = textToListOfNumbers(plaintext);
+    public static String caesarEncrypt(String plainText, int shift) {
+        int[] numbers = textToListOfNumbers(plainText);
         int[] shiftetNumbers = shiftListOfNumbers(numbers, shift);
-        String ciphertext = listOfNumbersToText(shiftetNumbers);
-        return ciphertext;
+        String cipherText = listOfNumbersToText(shiftetNumbers);
+        return cipherText;
     }
 
-    public static String caesarDecrypt(String ciphertext, int shift) {
-        int[] numbers = textToListOfNumbers(ciphertext);
+    public static String caesarDecrypt(String cipherText, int shift) {
+        int[] numbers = textToListOfNumbers(cipherText);
         int[] shiftetNumbers = shiftListOfNumbers(numbers, shift);
-        String plaintext = listOfNumbersToText(shiftetNumbers);
-        return plaintext;
-
+        String plainText = listOfNumbersToText(shiftetNumbers);
+        return plainText;
     }
 
     public static int[] shiftListOfNumbers(int[] numbers, int shift) {
@@ -161,9 +162,10 @@ public class cipherOgCeasar {
             }
         }
         return number;
-
     }
 }
+
+
 
 
 
