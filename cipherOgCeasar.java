@@ -3,11 +3,11 @@ package company;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 public class cipherOgCeasar {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        //velkomst- spørg om encode/decode
         System.out.println("""
                 Velkommen til Enigma
                 Her kan du enkode eller dekode en tekst.
@@ -15,59 +15,57 @@ public class cipherOgCeasar {
                 Skriv 1 for number cipher
                 Skriv 2 for Caeser cipher
                 Skriv 0 For exit""");
-        // bruger tager et valg mellem e og d
-        int answer = scanner.nextInt();
+        String answer = scanner.nextLine();
 
-        if (answer == 1) {
+        if (answer.equals("1")) {
             System.out.println("""
                     Du har valgt at benytte number cipher
                     Ønsker du at enkode eller dekode?
                     Skriv e for at enkode
                     Skriv d for at dekode""");
-            String answer1 = scanner.next();
-            if (answer1.equals("e")) {
+            String nextAnswer = scanner.nextLine();
+            if (nextAnswer.equals("e")) {
                 System.out.println("""
                         Du har valgt at en kode en tekst.
                         Skriv den tekst her:""");
-                String plaintext = scanner.next();
+                String plaintext = scanner.nextLine();
                 int[] planTextAsArray = textToListOfNumbers(plaintext);
                 String encryptetText = Arrays.toString(planTextAsArray);
                 System.out.println("Din talrække er: " + encryptetText);
             }
-            if (answer1.equals("d")) {
+            if (nextAnswer.equals("d")) {
                 System.out.println("""
                         Du har valgt at en dekode en tekst.
                         Skriv din tal række her:""");
-                String ciphertext = scanner.next();
+                String ciphertext = scanner.nextLine();
                 int[] ciphertextAsArray = splitNumbersIntoArray(ciphertext);
                 String decryptetText = listOfNumbersToText(ciphertextAsArray);
                 System.out.println("Din tekst er: " + decryptetText);
-
             }
         }
-        if (answer == 2) {
+        if (answer.equals("2")) {
             System.out.println("""
                     Du har valgt at benytte Ceaser cipher
                     Ønsker du at enkode eller dekode?
                     Skriv e for at enkode
                     Skriv d for at dekode""");
-            String answer1 = scanner.next();
-            if (answer1.equals("e")) {
+            String nextAnswer = scanner.nextLine();
+            if (nextAnswer.equals("e")) {
                 System.out.println("""
                         Du har valgt at enkode en tekst.
                         Skriv din tekst her:""");
-                String plaintext = scanner.next();
+                String plaintext = scanner.nextLine();
                 System.out.println("Hvilket tal skal koden forskydes med? (vælg tal mellem 1-29)");
                 int shift = scanner.nextInt();
                 String encryptettext = caesarEncrypt(plaintext, shift);
                 System.out.println("Din krypterede tekst er " + encryptettext);
 
             }
-            if (answer1.equals("d")) {
+            if (nextAnswer.equals("d")) {
                 System.out.println("""
                         Du har valgt at en dekode en tekst.
                         Skriv din krypterede tekst her:""");
-                String ciphertext = scanner.next();
+                String ciphertext = scanner.nextLine();
                 System.out.println("Hvilket tal er koden forskudt med? (vælg tal mellem 1-29)");
                 int shift = scanner.nextInt();
                 shift = 29 - shift;
@@ -75,7 +73,7 @@ public class cipherOgCeasar {
                 System.out.println("Din dekrypterede tekst er " + decryptetText);
             }
         }
-        if (answer == 0) {
+        if (answer.equals("0")) {
             System.out.println("Tak for denne gang!");
 
         }
